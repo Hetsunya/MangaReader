@@ -3,6 +3,7 @@ module manga-reader
 require (
 	github.com/PuerkitoBio/goquery v1.9.2
 	github.com/gocolly/colly v1.2.0
+	golang.org/x/exp v0.0.0-20240613232115-7f521ea00fb8
 )
 
 require (

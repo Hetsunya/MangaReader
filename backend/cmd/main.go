@@ -1,27 +1,34 @@
 package main
 
 import (
-	"manga-reader/backend/internal/services/scraper"
-	"manga-reader/backend/internal/services/searcher"
+	"fmt"
+	"manga-reader/backend/internal/services/imageextractor"
 )
 
+//imageextractor
+
 const (
-	baseURL = "https://mangapoisk.live/search" // замените на базовый URL сайта с мангой
+	baseURL = "https://mangapoisk.live" // Базовый URL сайта с мангой
 )
 
 func main() {
+	// searchResult, _ := searcher.Search("повышение уровня", baseURL)
 
-	// TODO: Выполнение поиска
+	// mangaURL := "https://mangapoisk.live/manga/i-have-90-billion-licking-gold?tab=chapters"
 
-	mangaURL, _ := searcher.Search("повышение уровня", baseURL)
+	// manga, err := scraper.Scrap(mangaURL)
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	// TODO: Доделать скрепер
+	// scraper.ScrapChapters(mangaURL, manga, baseURL)
 
-	// mangaURL := "https://mangapoisk.live/manga/max-level-player"
+	// scraper.PrintManga(manga)
 
-	manga, _ := scraper.Scrap(mangaURL)
-
-	scraper.PrintManga(manga)
+	pages := imageextractor.ExtractImages("https://mangapoisk.live/manga/i-have-90-billion-licking-gold/chapter/1-1")
+	for _, page := range pages {
+		fmt.Println(page)
+	}
 
 	// TODO: Инициализация кэша
 
