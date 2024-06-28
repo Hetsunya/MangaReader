@@ -75,7 +75,7 @@ func Scrap(url string) (*models.Manga, error) {
 
 /*
  */
-func ScrapChapters(query string, manga *models.Manga, baseURL string) error {
+func ScrapChapters(query string, manga *models.Manga) error {
 	page := 1
 
 	for {
@@ -105,7 +105,7 @@ func ScrapChapters(query string, manga *models.Manga, baseURL string) error {
 
 			chapter := models.Chapter{
 				Title: strings.TrimSpace(chapterTitle),
-				Link:  baseURL + strings.TrimSpace(chapterLink),
+				Link:  strings.TrimSpace(chapterLink),
 				Date:  strings.TrimSpace(publicationDate),
 			}
 
