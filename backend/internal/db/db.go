@@ -3,8 +3,6 @@ package db
 import (
 	"database/sql"
 	"log"
-
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func InitDB(filepath string) *sql.DB {
@@ -17,8 +15,8 @@ func InitDB(filepath string) *sql.DB {
 		`CREATE TABLE IF NOT EXISTS manga_lists (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			name TEXT,
-			url TEXT,
-			status TEXT
+			url TEXT UNIQUE,
+			status TEXT CHECK(status IN ('читаю', 'в планах', 'брошено', 'готово', 'любимое'))
 		);`,
 		`CREATE TABLE IF NOT EXISTS manga_tags (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,

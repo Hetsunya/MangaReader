@@ -9,6 +9,8 @@ import (
 	"manga-reader/backend/internal/services/searcher"
 	"os"
 
+	_ "github.com/mattn/go-sqlite3"
+
 	"golang.org/x/exp/slog"
 )
 
@@ -31,14 +33,13 @@ func main() {
 	mangaSearchResult, err := searcher.SearchManga("повышение уровня")
 	if err != nil {
 		log.Error("Ошибка при поиске манги: %v", err)
+		return
 	}
 
 	if mangaSearchResult == nil || len(mangaSearchResult.FoundMangas) == 0 {
 		fmt.Println("Манга не найдена")
 		return
 	}
-
-	var selectedMangaURL string
 
 	log.Info("Найдены следующие манги:")
 	for i, manga := range mangaSearchResult.FoundMangas {
@@ -50,9 +51,11 @@ func main() {
 	_, err = fmt.Scan(&choice)
 	if err != nil || choice < 1 || choice > len(mangaSearchResult.FoundMangas) {
 		log.Error("Неверный выбор: %v", err)
+		return
 	}
 
-	selectedMangaURL = mangaSearchResult.FoundMangas[choice-1].URL
+	selectedManga := mangaSearchResult.FoundMangas[choice-1]
+	selectedMangaURL := selectedManga.URL
 
 	log.Info(selectedMangaURL)
 
@@ -71,8 +74,18 @@ func main() {
 	jsonString, _ := jsonutil.ToJSON(manga)
 	fmt.Println(jsonString)
 
+	exists, err := db.CheckMangaExists(database, selectedMangaURL)
+	if err != nil {
+		log.Error("Error checking manga existence:", err)
+		return
+	}
+	if exists {
+		log.Info("Манга уже существует в базе данных")
+		return
+	}
+
 	mangaList := models.MangaList{
-		Name:   "Example Manga",
+		Name:   manga.Title[0],
 		URL:    selectedMangaURL,
 		Status: "читаю",
 	}
@@ -80,7 +93,7 @@ func main() {
 	listID, err := db.CreateMangaList(database, mangaList)
 	if err != nil {
 		log.Error("Error creating manga list:", err)
-		os.Exit(1)
+		return
 	}
 
 	log.Info("Created manga list with ID:", listID)
@@ -88,7 +101,7 @@ func main() {
 	lists, err := db.GetMangaLists(database)
 	if err != nil {
 		log.Error("Error fetching manga lists:", err)
-		os.Exit(1)
+		return
 	}
 
 	log.Info("Manga lists:", lists)
