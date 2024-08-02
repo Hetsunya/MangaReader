@@ -5,7 +5,6 @@ import (
 	"manga-reader/backend/internal/db"
 	"manga-reader/backend/internal/lib/jsonutil"
 	"manga-reader/backend/internal/models"
-	"manga-reader/backend/internal/services/imageextractor"
 	"manga-reader/backend/internal/services/scraper"
 	"manga-reader/backend/internal/services/searcher"
 	"os"
@@ -28,20 +27,6 @@ func main() {
 	dbFilePath := "manga_reader.db"
 	database := db.InitDB(dbFilePath)
 	defer database.Close()
-
-	user := models.User{
-		Username:     "testuser",
-		Email:        "testuser@example.com",
-		PasswordHash: "hashedpassword",
-	}
-
-	userID, err := db.CreateUser(database, user)
-	if err != nil {
-		log.Error("Error creating user: %v", err)
-		os.Exit(1)
-	}
-
-	log.Info("Created user with ID:", userID)
 
 	mangaSearchResult, err := searcher.SearchManga("повышение уровня")
 	if err != nil {
@@ -86,13 +71,8 @@ func main() {
 	jsonString, _ := jsonutil.ToJSON(manga)
 	fmt.Println(jsonString)
 
-	pages := imageextractor.ExtractImages("https://mangapoisk.live/manga/i-have-90-billion-licking-gold/chapter/1-1")
-	for _, page := range pages {
-		fmt.Println(page)
-	}
-
 	mangaList := models.MangaList{
-		UserID: userID,
+		Name:   "Example Manga",
 		URL:    selectedMangaURL,
 		Status: "читаю",
 	}
@@ -105,11 +85,11 @@ func main() {
 
 	log.Info("Created manga list with ID:", listID)
 
-	lists, err := db.GetMangaListsByUserID(database, userID)
+	lists, err := db.GetMangaLists(database)
 	if err != nil {
 		log.Error("Error fetching manga lists:", err)
 		os.Exit(1)
 	}
 
-	log.Info("Manga lists for user ID", userID, ":", lists)
+	log.Info("Manga lists:", lists)
 }

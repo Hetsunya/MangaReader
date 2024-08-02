@@ -6,8 +6,8 @@ import (
 )
 
 func CreateMangaList(db *sql.DB, list models.MangaList) (int, error) {
-	query := `INSERT INTO manga_lists (user_id, url, status) VALUES (?, ?, ?)`
-	result, err := db.Exec(query, list.UserID, list.URL, list.Status)
+	query := `INSERT INTO manga_lists (name, url, status) VALUES (?, ?, ?)`
+	result, err := db.Exec(query, list.Name, list.URL, list.Status)
 	if err != nil {
 		return 0, err
 	}
@@ -20,9 +20,9 @@ func CreateMangaList(db *sql.DB, list models.MangaList) (int, error) {
 	return int(id), nil
 }
 
-func GetMangaListsByUserID(db *sql.DB, userID int) ([]models.MangaList, error) {
-	query := `SELECT id, user_id, url, status FROM manga_lists WHERE user_id = ?`
-	rows, err := db.Query(query, userID)
+func GetMangaLists(db *sql.DB) ([]models.MangaList, error) {
+	query := `SELECT id, name, url, status FROM manga_lists`
+	rows, err := db.Query(query)
 	if err != nil {
 		return nil, err
 	}
@@ -31,7 +31,7 @@ func GetMangaListsByUserID(db *sql.DB, userID int) ([]models.MangaList, error) {
 	var lists []models.MangaList
 	for rows.Next() {
 		var list models.MangaList
-		err = rows.Scan(&list.ID, &list.UserID, &list.URL, &list.Status)
+		err = rows.Scan(&list.ID, &list.Name, &list.URL, &list.Status)
 		if err != nil {
 			return nil, err
 		}

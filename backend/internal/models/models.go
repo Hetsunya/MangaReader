@@ -45,18 +45,13 @@ type FoundManga struct {
 }
 
 //Все ниже для БД
-type User struct {
-	ID           int    `json:"id"`
-	Username     string `json:"username"`
-	Email        string `json:"email"`
-	PasswordHash string `json:"password_hash"`
-}
 
+//TODO: Обсудить что делать с аутентификацией юзеров
 type MangaList struct {
 	ID     int    `json:"id"`
-	UserID int    `json:"user_id"`
+	Name   string `json:"name"`
 	URL    string `json:"url"`
-	Status string `json:"status"` // например, 'читаю', 'в планах', 'брошено'
+	Status string `json:"status"` // например, 'читаю', 'в планах', 'брошено' 'готово' 'любимое'
 }
 
 type MangaTag struct {

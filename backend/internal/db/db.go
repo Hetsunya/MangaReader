@@ -13,44 +13,27 @@ func InitDB(filepath string) *sql.DB {
 		log.Fatal(err)
 	}
 
-	createTables(db)
+	createTableQueries := []string{
+		`CREATE TABLE IF NOT EXISTS manga_lists (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			name TEXT,
+			url TEXT,
+			status TEXT
+		);`,
+		`CREATE TABLE IF NOT EXISTS manga_tags (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			list_id INTEGER,
+			tag TEXT,
+			FOREIGN KEY (list_id) REFERENCES manga_lists(id)
+		);`,
+	}
+
+	for _, query := range createTableQueries {
+		_, err := db.Exec(query)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 
 	return db
-}
-
-func createTables(db *sql.DB) {
-	createUserTableSQL := `CREATE TABLE IF NOT EXISTS users (
-        "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-        "username" TEXT NOT NULL,
-        "email" TEXT NOT NULL,
-        "password_hash" TEXT NOT NULL
-    );`
-
-	createMangaListTableSQL := `CREATE TABLE IF NOT EXISTS manga_lists (
-        "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-        "user_id" INTEGER NOT NULL,
-        "url" TEXT NOT NULL,
-        "status" TEXT
-    );`
-
-	createMangaTagTableSQL := `CREATE TABLE IF NOT EXISTS manga_tags (
-        "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-        "list_id" INTEGER NOT NULL,
-        "tag" TEXT
-    );`
-
-	_, err := db.Exec(createUserTableSQL)
-	if err != nil {
-		log.Fatalf("Error creating users table: %v", err)
-	}
-
-	_, err = db.Exec(createMangaListTableSQL)
-	if err != nil {
-		log.Fatalf("Error creating manga_lists table: %v", err)
-	}
-
-	_, err = db.Exec(createMangaTagTableSQL)
-	if err != nil {
-		log.Fatalf("Error creating manga_tags table: %v", err)
-	}
 }
