@@ -32,3 +32,35 @@ const (
 	//TODO: Разобраться что делать с путем
 	JsonDir = "C:\\Users\\vital\\Desktop\\MangaReader\\backend\\jsons"
 )
+
+// SearchResult представляет результат поиска манги
+type SearchResult struct {
+	FoundMangas []FoundManga
+}
+
+// FoundManga представляет информацию о найденной манге
+type FoundManga struct {
+	URL   string
+	Title string
+}
+
+//Все ниже для БД
+type User struct {
+	ID           int    `json:"id"`
+	Username     string `json:"username"`
+	Email        string `json:"email"`
+	PasswordHash string `json:"password_hash"`
+}
+
+type MangaList struct {
+	ID     int    `json:"id"`
+	UserID int    `json:"user_id"`
+	URL    string `json:"url"`
+	Status string `json:"status"` // например, 'читаю', 'в планах', 'брошено'
+}
+
+type MangaTag struct {
+	ID     int    `json:"id"`
+	ListID int    `json:"list_id"`
+	Tag    string `json:"tag"`
+}
