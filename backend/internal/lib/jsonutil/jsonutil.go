@@ -63,3 +63,5 @@ func ToJSON(v interface{}) (string, error) {
 	// Возвращение строкового представления JSON.
 	return string(data), nil
 }
+
+//TODO: Удалить и сделать на фронте или хз че там

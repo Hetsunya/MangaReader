@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"encoding/json"
 	"fmt"
 	"manga-reader/backend/internal/models"
 	"manga-reader/backend/internal/services/imageextractor"
@@ -10,68 +9,106 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/gin-gonic/gin"
 )
 
 // ExtractImagesHandler извлекает изображения манги по URL
-func ExtractImagesHandler(w http.ResponseWriter, r *http.Request) {
-	url := r.URL.Query().Get("url")
+// @Summary Извлечение изображений манги по URL
+// @Description Извлекает изображения манги с указанного URL.
+// @Tags Manga
+// @Accept json
+// @Produce json
+// @Param url query string true "URL страницы манги"
+// @Success 200 {array} models.MangaPage
+// @Failure 400 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /extract/images [get]
+func ExtractImagesHandler(c *gin.Context) {
+	url := c.Query("url")
 	if url == "" {
-		http.Error(w, "URL параметр 'url' обязателен", http.StatusBadRequest)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "URL параметр 'url' обязателен"})
 		return
 	}
 
 	pages, err := imageextractor.ExtractImages(url)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Ошибка при извлечении изображений: %v", err), http.StatusInternalServerError)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при извлечении изображений: %v", err)})
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(pages)
+	c.JSON(http.StatusOK, pages)
 }
 
 // ScrapMangaHandler парсит информацию о манге по URL
-func ScrapMangaHandler(w http.ResponseWriter, r *http.Request) {
-	url := r.URL.Query().Get("url")
+// @Summary Парсинг информации о манге по URL
+// @Description Парсит информацию о манге с указанного URL.
+// @Tags Manga
+// @Accept json
+// @Produce json
+// @Param url query string true "URL страницы манги"
+// @Success 200 {object} models.Manga
+// @Failure 400 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /scrap [get]
+func ScrapMangaHandler(c *gin.Context) {
+	url := c.Query("url")
 	if url == "" {
-		http.Error(w, "URL параметр 'url' обязателен", http.StatusBadRequest)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "URL параметр 'url' обязателен"})
 		return
 	}
 
 	manga, err := scraper.Scrap(url)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Ошибка при скрапинге манги: %v", err), http.StatusInternalServerError)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при скрапинге манги: %v", err)})
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(manga)
+	c.JSON(http.StatusOK, manga)
 }
 
 // ScrapChaptersHandler парсит главы манги по URL
-func ScrapChaptersHandler(w http.ResponseWriter, r *http.Request) {
-	url := r.URL.Query().Get("url")
+// @Summary Парсинг глав манги по URL
+// @Description Парсит главы манги с указанного URL.
+// @Tags Manga
+// @Accept json
+// @Produce json
+// @Param url query string true "URL страницы манги"
+// @Success 200 {array} models.Chapter
+// @Failure 400 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /scrap/chapters [get]
+func ScrapChaptersHandler(c *gin.Context) {
+	url := c.Query("url")
 	if url == "" {
-		http.Error(w, "URL параметр 'url' обязателен", http.StatusBadRequest)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "URL параметр 'url' обязателен"})
 		return
 	}
 
 	var manga models.Manga
 	err := scraper.ScrapChapters(url, &manga)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Ошибка при скрапинге глав: %v", err), http.StatusInternalServerError)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при скрапинге глав: %v", err)})
 		return
 	}
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(manga.Chapters)
+	c.JSON(http.StatusOK, manga.Chapters)
 }
 
-// SearchMangaHandler выполняет поиск манги по заданному запросу.
-func SearchMangaHandler(w http.ResponseWriter, r *http.Request) {
-	query := r.URL.Query().Get("q")
+// SearchMangaHandler выполняет поиск манги по заданному запросу
+// @Summary Поиск манги по запросу
+// @Description Выполняет поиск манги по заданному запросу.
+// @Tags Manga
+// @Accept json
+// @Produce json
+// @Param q query string true "Поисковый запрос"
+// @Success 200 {object} models.SearchResult
+// @Failure 400 {object} gin.H
+// @Failure 500 {object} gin.H
+// @Router /search [get]
+func SearchMangaHandler(c *gin.Context) {
+	query := c.Query("q")
 	if query == "" {
-		http.Error(w, "Query parameter 'q' is required", http.StatusBadRequest)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Query параметр 'q' обязателен"})
 		return
 	}
 
@@ -86,14 +123,14 @@ func SearchMangaHandler(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := http.Get(baseURL + "search?q=" + query)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Ошибка при загрузке страницы поиска: %v", err), http.StatusInternalServerError)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при загрузке страницы поиска: %v", err)})
 		return
 	}
 	defer resp.Body.Close()
 
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
-		http.Error(w, fmt.Sprintf("Ошибка при парсинге HTML страницы поиска: %v", err), http.StatusInternalServerError)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при парсинге HTML страницы поиска: %v", err)})
 		return
 	}
 
@@ -112,11 +149,10 @@ func SearchMangaHandler(w http.ResponseWriter, r *http.Request) {
 	})
 
 	if len(foundMangas) == 0 {
-		http.Error(w, "Манга не найдена", http.StatusNotFound)
+		c.JSON(http.StatusNotFound, gin.H{"message": "Манга не найдена"})
 		return
 	}
 
 	result := models.SearchResult{FoundMangas: foundMangas}
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(result)
+	c.JSON(http.StatusOK, result)
 }

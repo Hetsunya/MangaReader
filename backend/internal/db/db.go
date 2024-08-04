@@ -35,3 +35,5 @@ func InitDB(filepath string) *sql.DB {
 
 	return db
 }
+
+//TODO: Удалить и сделать на фронте или хз че там
