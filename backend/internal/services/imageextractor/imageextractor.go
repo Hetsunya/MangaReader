@@ -1,7 +1,7 @@
 package imageextractor
 
 import (
-	"log"
+	"fmt"
 	"net/http"
 	"strings"
 
@@ -12,25 +12,25 @@ import (
 
 // ExtractImages извлекает информацию о страницах манги с указанного URL.
 // Функция возвращает слайс models.MangaPage, содержащий информацию о каждой странице манги.
-func ExtractImages(url string) []models.MangaPage {
+func ExtractImages(url string) ([]models.MangaPage, error) {
 	var pages []models.MangaPage
 
 	// HTTP GET запрос к указанному URL
 	resp, err := http.Get(url)
 	if err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("ошибка при выполнении запроса: %w", err)
 	}
 	defer resp.Body.Close()
 
 	// Проверка статуса ответа
 	if resp.StatusCode != http.StatusOK {
-		log.Fatalf("Ошибка при получении страницы: %s", resp.Status)
+		return nil, fmt.Errorf("ошибка при получении страницы: статус %s", resp.Status)
 	}
 
 	// Создание нового документа goquery из ответа
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		return nil, fmt.Errorf("ошибка при создании документа goquery: %w", err)
 	}
 
 	// Парсинг изображений
@@ -39,11 +39,10 @@ func ExtractImages(url string) []models.MangaPage {
 		if exists && strings.Contains(src, "pages") {
 			page := models.MangaPage{
 				ImageURL: src,
-				// Дополнительные поля могут быть заполнены здесь
 			}
 			pages = append(pages, page)
 		}
 	})
 
-	return pages
+	return pages, nil
 }

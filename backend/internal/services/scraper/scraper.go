@@ -24,8 +24,8 @@ func Scrap(url string) (*models.Manga, error) {
 	// Установка лимитов для запросов
 	c.Limit(&colly.LimitRule{
 		DomainGlob:  "*",
-		Parallelism: 1,               // Запросов в секунду
-		Delay:       1 * time.Second, // Можно уменьшить, если допустимо
+		Parallelism: 1,           // Запросов в секунду
+		Delay:       time.Second, // Можно уменьшить, если допустимо
 	})
 
 	manga := &models.Manga{}

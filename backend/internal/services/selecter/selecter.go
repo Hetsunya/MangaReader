@@ -28,3 +28,5 @@ func SelectManga(mangaSearchResult *models.SearchResult, log *slog.Logger) (stri
 	selectedMangaURL := mangaSearchResult.FoundMangas[choice-1].URL
 	return selectedMangaURL, nil
 }
+
+//TODO: Удалить и сделать на фронте
