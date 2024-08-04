@@ -3,19 +3,19 @@ package main
 import (
 	"fmt"
 	"log"
-	_ "manga-reader/backend/cmd/docs"
 	"manga-reader/backend/internal/handlers"
+	_ "manga-reader/docs"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
-// @title Manga Reader API
-// @version 1.0
-// @description API для поиска манги и получения информации о манге
-// @host localhost:8080
-// @basePath /
+// @title			Manga Reader API
+// @version		1.0
+// @description	API для поиска манги и получения информации о манге
+// @host			localhost:8080
+// @basePath		/
 func main() {
 	router := gin.Default()
 

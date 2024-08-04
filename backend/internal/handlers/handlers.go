@@ -1,158 +1,116 @@
 package handlers
 
 import (
-	"fmt"
 	"manga-reader/backend/internal/models"
 	"manga-reader/backend/internal/services/imageextractor"
 	"manga-reader/backend/internal/services/scraper"
+	"manga-reader/backend/internal/services/searcher"
 	"net/http"
-	"strings"
 
-	"github.com/PuerkitoBio/goquery"
 	"github.com/gin-gonic/gin"
 )
 
-// ExtractImagesHandler извлекает изображения манги по URL
-// @Summary Извлечение изображений манги по URL
-// @Description Извлекает изображения манги с указанного URL.
-// @Tags Manga
+// @Summary Extract images from manga URL
+// @Description Находит изображения 1 главы манги.
+// @Tags manga
 // @Accept json
 // @Produce json
-// @Param url query string true "URL страницы манги"
+// @Param url query string true "Ссылка на главу"
 // @Success 200 {array} models.MangaPage
-// @Failure 400 {object} gin.H
-// @Failure 500 {object} gin.H
+// @Failure 400 {object} models.ErrorResponse
+// @Failure 500 {object} models.ErrorResponse
 // @Router /extract/images [get]
 func ExtractImagesHandler(c *gin.Context) {
 	url := c.Query("url")
 	if url == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "URL параметр 'url' обязателен"})
+		c.JSON(http.StatusBadRequest, models.ErrorResponse{Error: "URL parameter 'url' is required"})
 		return
 	}
 
 	pages, err := imageextractor.ExtractImages(url)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при извлечении изображений: %v", err)})
+		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Error: "Failed to extract images"})
 		return
 	}
 
 	c.JSON(http.StatusOK, pages)
 }
 
-// ScrapMangaHandler парсит информацию о манге по URL
-// @Summary Парсинг информации о манге по URL
-// @Description Парсит информацию о манге с указанного URL.
-// @Tags Manga
+// @Summary Scrape manga information from URL
+// @Description Берет инфу о манге с html страницы
+// @Tags manga
 // @Accept json
 // @Produce json
-// @Param url query string true "URL страницы манги"
+// @Param url query string true "Ссылка на мангу"
 // @Success 200 {object} models.Manga
-// @Failure 400 {object} gin.H
-// @Failure 500 {object} gin.H
+// @Failure 400 {object} models.ErrorResponse
+// @Failure 500 {object} models.ErrorResponse
 // @Router /scrap [get]
 func ScrapMangaHandler(c *gin.Context) {
 	url := c.Query("url")
 	if url == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "URL параметр 'url' обязателен"})
+		c.JSON(http.StatusBadRequest, models.ErrorResponse{Error: "URL parameter 'url' is required"})
 		return
 	}
 
 	manga, err := scraper.Scrap(url)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при скрапинге манги: %v", err)})
+		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Error: "Failed to scrape manga information"})
 		return
 	}
 
 	c.JSON(http.StatusOK, manga)
 }
 
-// ScrapChaptersHandler парсит главы манги по URL
-// @Summary Парсинг глав манги по URL
-// @Description Парсит главы манги с указанного URL.
-// @Tags Manga
+// @Summary Scrape manga chapters from URL
+// @Description Берет инфу о главах манги с html страницы
+// @Tags manga
 // @Accept json
 // @Produce json
-// @Param url query string true "URL страницы манги"
+// @Param url query string true "Ссылка на мангу + ?tab=chapters"
 // @Success 200 {array} models.Chapter
-// @Failure 400 {object} gin.H
-// @Failure 500 {object} gin.H
+// @Failure 400 {object} models.ErrorResponse
+// @Failure 500 {object} models.ErrorResponse
 // @Router /scrap/chapters [get]
 func ScrapChaptersHandler(c *gin.Context) {
 	url := c.Query("url")
 	if url == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "URL параметр 'url' обязателен"})
+		c.JSON(http.StatusBadRequest, models.ErrorResponse{Error: "URL parameter 'url' is required"})
 		return
 	}
 
 	var manga models.Manga
 	err := scraper.ScrapChapters(url, &manga)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при скрапинге глав: %v", err)})
+		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Error: "Failed to scrape chapters"})
 		return
 	}
 
 	c.JSON(http.StatusOK, manga.Chapters)
 }
 
-// SearchMangaHandler выполняет поиск манги по заданному запросу
-// @Summary Поиск манги по запросу
-// @Description Выполняет поиск манги по заданному запросу.
-// @Tags Manga
+// @Summary Search for manga by query
+// @Description Находит мангу по запросу.
+// @Tags manga
 // @Accept json
 // @Produce json
-// @Param q query string true "Поисковый запрос"
+// @Param q query string true "Слова для поиска через +"
 // @Success 200 {object} models.SearchResult
-// @Failure 400 {object} gin.H
-// @Failure 500 {object} gin.H
+// @Failure 400 {object} models.ErrorResponse
+// @Failure 500 {object} models.ErrorResponse
 // @Router /search [get]
 func SearchMangaHandler(c *gin.Context) {
 	query := c.Query("q")
 	if query == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Query параметр 'q' обязателен"})
+		c.JSON(http.StatusBadRequest, models.ErrorResponse{Error: "Query parameter 'q' is required"})
 		return
 	}
 
-	baseURL := models.BaseURL
-	if !strings.HasSuffix(baseURL, "/") {
-		baseURL += "/"
-	}
-
-	if strings.Contains(query, " ") {
-		query = strings.ReplaceAll(query, " ", "+")
-	}
-
-	resp, err := http.Get(baseURL + "search?q=" + query)
+	result, err := searcher.SearchManga(query)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при загрузке страницы поиска: %v", err)})
-		return
-	}
-	defer resp.Body.Close()
-
-	doc, err := goquery.NewDocumentFromReader(resp.Body)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Ошибка при парсинге HTML страницы поиска: %v", err)})
+		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Error: err.Error()})
 		return
 	}
 
-	var foundMangas []models.FoundManga
-
-	doc.Find(".flex-container.row.align-items-start.justify-content-center .flex-item.card.mx-1.mx-md-2.mb-3.shadow-sm.rounded").Each(func(i int, s *goquery.Selection) {
-		href, exists := s.Find("a[href]").Attr("href")
-		if exists {
-			title := s.Find("h2.entry-title").Text()
-			foundManga := models.FoundManga{
-				URL:   models.BaseURL + href,
-				Title: title,
-			}
-			foundMangas = append(foundMangas, foundManga)
-		}
-	})
-
-	if len(foundMangas) == 0 {
-		c.JSON(http.StatusNotFound, gin.H{"message": "Манга не найдена"})
-		return
-	}
-
-	result := models.SearchResult{FoundMangas: foundMangas}
 	c.JSON(http.StatusOK, result)
 }
