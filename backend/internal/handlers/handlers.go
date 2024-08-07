@@ -11,7 +11,7 @@ import (
 )
 
 // @Summary Extract images from manga URL
-// @Description Находит изображения 1 главы манги.
+// @Description Находит изображения одной главы манги.
 // @Tags manga
 // @Accept json
 // @Produce json

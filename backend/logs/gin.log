@@ -13,3 +13,181 @@
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/05 - 13:16:31 | 200 |            0s |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/05 - 13:16:32 | 200 |       505.6µs |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/05 - 13:16:32 | 200 |       1.405ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/05 - 13:16:32 | 200 |      4.1318ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/05 - 13:16:32 | 200 |      4.0008ms |             ::1 | GET      "/swagger/doc.json"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:11:17 | 200 |      1.0157ms |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:18 | 200 |      1.5044ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:11:18 | 200 |      3.0006ms |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:11:18 | 200 |     23.3467ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:11:18 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:11:18 | 200 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2024/08/07 - 09:11:25 | 200 |            0s |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:25 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:11:25 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:11:25 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:11:25 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:11:25 | 304 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2024/08/07 - 09:11:26 | 200 |       748.6µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:26 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:11:26 | 200 |       676.9µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:26 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:11:27 | 200 |       700.8µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:27 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:11:27 | 200 |            0s |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:27 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:11:27 | 200 |       620.1µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:27 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:11:28 | 200 |            0s |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:28 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:11:28 | 200 |       208.4µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:28 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:11:28 | 200 |       116.8µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:11:28 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:12:07 | 200 |       2.518ms |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:12:07 | 200 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:12:07 | 200 |       575.9µs |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:12:07 | 200 |      9.8794ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:12:07 | 500 |       542.7µs |             ::1 | GET      "/swagger/doc.json"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:12:51 | 200 |       595.3µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:12:51 | 200 |       800.6µs |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:12:51 | 200 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:12:51 | 200 |      5.0055ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:12:51 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:12:51 | 200 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2024/08/07 - 09:12:52 | 200 |            0s |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:12:52 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:12:52 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:12:52 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:12:52 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:12:53 | 304 |      1.0033ms |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2024/08/07 - 09:12:53 | 200 |       533.7µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:12:53 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:12:53 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:12:53 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:12:53 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:12:54 | 200 |           1ms |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:12:54 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:12:54 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:12:54 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:12:54 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:12:54 | 304 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:13:59 | 200 |       565.1µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:13:59 | 200 |       917.1µs |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:13:59 | 200 |      1.0011ms |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:13:59 | 200 |       2.109ms |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:13:59 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:13:59 | 200 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2024/08/07 - 09:15:19 | 200 |       278.1µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:15:19 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:15:19 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:15:19 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:15:19 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:15:19 | 304 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2024/08/07 - 09:15:23 | 404 |            0s |             ::1 | GET      "/objects"
+[GIN] 2024/08/07 - 09:15:23 | 404 |            0s |             ::1 | GET      "/favicon.ico"
+[GIN] 2024/08/07 - 09:15:27 | 200 |            0s |             ::1 | GET      "/"
+[GIN-debug] redirecting request 301: /swagger/ --> /swagger/
+[GIN] 2024/08/07 - 09:15:30 | 301 |            0s |             ::1 | GET      "/swagger/"
+[GIN] 2024/08/07 - 09:15:30 | 200 |            0s |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:15:30 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:15:30 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:15:30 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:15:30 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:15:32 | 200 |    498.0372ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:15:35 | 200 |       825.5µs |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:15:35 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:15:35 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:15:35 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:15:35 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:15:35 | 304 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2024/08/07 - 09:18:07 | 200 |    404.1607ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:18:09 | 200 |    256.3777ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:18:10 | 200 |    259.6597ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:18:10 | 200 |     267.623ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:18:11 | 200 |    255.4113ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:18:15 | 200 |    265.3506ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:18:28 | 200 |            0s |             ::1 | GET      "/swagger/index.html"
+[GIN] 2024/08/07 - 09:18:28 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui.css"
+[GIN] 2024/08/07 - 09:18:28 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-bundle.js"
+[GIN] 2024/08/07 - 09:18:28 | 304 |            0s |             ::1 | GET      "/swagger/swagger-ui-standalone-preset.js"
+[GIN] 2024/08/07 - 09:18:28 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
+[GIN] 2024/08/07 - 09:18:28 | 304 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
+[GIN] 2024/08/07 - 09:18:34 | 200 |            0s |             ::1 | GET      "/"

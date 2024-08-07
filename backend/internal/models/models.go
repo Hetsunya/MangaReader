@@ -55,7 +55,6 @@ type MangaPage struct {
 const (
 	BaseURL      = "https://mangapoisk.live"
 	ChapterParse = "?tab=chapters"
-	JsonDir      = "C:\\Users\\vital\\Desktop\\MangaReader\\backend\\jsons"
 )
 
 // SearchResult представляет результат поиска манги
