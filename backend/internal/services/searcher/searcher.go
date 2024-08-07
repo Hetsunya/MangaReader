@@ -9,7 +9,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-// Search выполняет поиск по заданному запросу на указанном базовом URL и возвращает результат поиска.
+// SearchManga выполняет поиск по заданному запросу на указанном базовом URL и возвращает результат поиска.
 //
 // Параметры:
 // - query: Строка запроса поиска.
@@ -29,9 +29,6 @@ func SearchManga(query string) (*models.SearchResult, error) {
 	}
 
 	resp, err := http.Get(baseURL + "search?q=" + query)
-
-	// Defer - функция отложенного вызова, то есть если ошибки не было
-	// то ресы освободятся после выхода из функции
 	if err != nil {
 		return nil, fmt.Errorf("Ошибка при загрузке страницы поиска: %w", err)
 	}
@@ -48,12 +45,20 @@ func SearchManga(query string) (*models.SearchResult, error) {
 		// Извлекаем URL манги
 		href, exists := s.Find("a[href]").Attr("href")
 		if exists {
+			// Извлекаем URL обложки
+			imageElem := s.Find("img.img-fluid.card-img-top")
+			imageURL, exists := imageElem.Attr("src")
+			if !exists || strings.HasPrefix(imageURL, "data:image") {
+				imageURL, _ = imageElem.Attr("data-src")
+			}
 			// Извлекаем название манги
-			title := s.Find("h2.entry-title").Text()
+			title, _ := imageElem.Attr("title")
+
 			// Создаем структуру FoundManga
 			foundManga := models.FoundManga{
-				URL:   models.BaseURL + href,
-				Title: title,
+				URL:      models.BaseURL + href,
+				Title:    title,
+				ImageURL: imageURL,
 			}
 			// Добавляем в массив найденных манг
 			foundMangas = append(foundMangas, foundManga)

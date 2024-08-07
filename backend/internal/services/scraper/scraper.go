@@ -38,6 +38,11 @@ func Scrap(url string) (*models.Manga, error) {
 		}
 	})
 
+	// Получение обложки манги
+	c.OnHTML("img.rounded-container-token.preload.w-full.h-auto.max-w-3xs.md\\:max-w-xs.mx-auto", func(e *colly.HTMLElement) {
+		imageURL := e.Attr("src")
+		manga.ImageURL = imageURL
+	})
 	// Получение жанров манги
 	c.OnHTML(".badge.variant-soft-tertiary.mb-1.mr-1", func(e *colly.HTMLElement) {
 		manga.Genre = append(manga.Genre, e.Text)

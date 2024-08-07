@@ -25,6 +25,8 @@ type Manga struct {
 	// @Description Год выпуска
 	// @Example "2000"
 	Year string `json:"year"`
+	// @Description Обложка найденной манги
+	ImageURL string `json:"image_url"`
 }
 
 // Chapter представляет информацию о главе манги
@@ -78,6 +80,8 @@ type FoundManga struct {
 	// @Description Заголовок найденной манги
 	// @Example "Manga Title 1"
 	Title string `json:"title"`
+	// @Description Обложка найденной манги
+	ImageURL string `json:"image_url"`
 }
 
 // ErrorResponse представляет ошибку в ответе API

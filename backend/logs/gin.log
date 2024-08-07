@@ -191,3 +191,123 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 [GIN] 2024/08/07 - 09:18:28 | 500 |            0s |             ::1 | GET      "/swagger/doc.json"
 [GIN] 2024/08/07 - 09:18:28 | 304 |            0s |             ::1 | GET      "/swagger/favicon-32x32.png"
 [GIN] 2024/08/07 - 09:18:34 | 200 |            0s |             ::1 | GET      "/"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN-debug] [ERROR] listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:31:58 | 200 |    395.5854ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:31:58 | 404 |            0s |             ::1 | GET      "/favicon.ico"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:33:56 | 200 |    420.5292ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:33:57 | 404 |            0s |             ::1 | GET      "/favicon.ico"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:34:40 | 200 |     387.873ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:34:41 | 200 |    214.7434ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:42:19 | 200 |    420.7279ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:42:19 | 404 |            0s |             ::1 | GET      "/favicon.ico"
+[GIN] 2024/08/07 - 09:43:35 | 200 |    225.6876ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:49:06 | 200 |    1.4589836s |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN] 2024/08/07 - 09:50:47 | 200 |    380.4942ms |             ::1 | GET      "/search?q=%D0%BF%D0%BE%D0%B2%D1%8B%D1%88%D0%B5%D0%BD%D0%B8%D0%B5%2B%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /swagger/*any             --> manga-reader/backend/internal/routes.InitRoutes.WrapH.func2 (3 handlers)
+[GIN-debug] GET    /                         --> manga-reader/backend/internal/routes.InitRoutes.func1 (3 handlers)
+[GIN-debug] GET    /search                   --> manga-reader/backend/internal/handlers.SearchMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap                    --> manga-reader/backend/internal/handlers.ScrapMangaHandler (3 handlers)
+[GIN-debug] GET    /scrap/chapters           --> manga-reader/backend/internal/handlers.ScrapChaptersHandler (3 handlers)
+[GIN-debug] GET    /extract/images           --> manga-reader/backend/internal/handlers.ExtractImagesHandler (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :8080
+[GIN] 2024/08/07 - 09:57:37 | 200 |     1.369097s |             ::1 | GET      "/scrap?url=https://mangapoisk.live/manga/i-got-a-cheat-ability-in-a-different-world-and-became-extraordinary-even-in-the-real-world"
+[GIN] 2024/08/07 - 09:57:37 | 404 |            0s |             ::1 | GET      "/favicon.ico"
+[GIN] 2024/08/07 - 09:58:53 | 200 |    1.1407291s |             ::1 | GET      "/scrap?url=https://mangapoisk.live/manga/only-i-know-that-the-world-will-end"
