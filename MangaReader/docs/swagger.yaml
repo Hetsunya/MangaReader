@@ -1,0 +1,236 @@
+basePath: /
+definitions:
+  models.Chapter:
+    description: Chapter represents information about a manga chapter
+    properties:
+      date:
+        description: |-
+          @Description Дата публикации главы
+          @Example "2024-01-01"
+        type: string
+      link:
+        description: |-
+          @Description Ссылка на главу
+          @Example "https://example.com/chapter1"
+        type: string
+      pages:
+        allOf:
+        - $ref: '#/definitions/models.MangaPage'
+        description: |-
+          @Description Страницы главы манги
+          @Example [{"image_url": "https://example.com/image1.jpg"}]
+      title:
+        description: |-
+          @Description Заголовок главы
+          @Example "Chapter 1: Departure"
+        type: string
+    type: object
+  models.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  models.FoundManga:
+    description: FoundManga represents information about a found manga
+    properties:
+      title:
+        description: |-
+          @Description Заголовок найденной манги
+          @Example "Manga Title 1"
+        type: string
+      url:
+        description: |-
+          @Description URL найденной манги
+          @Example "https://example.com/manga1"
+        type: string
+    type: object
+  models.Manga:
+    description: Manga represents information about a manga
+    properties:
+      chapters:
+        description: '@Description Список глав манги'
+        items:
+          $ref: '#/definitions/models.Chapter'
+        type: array
+      description:
+        description: |-
+          @Description Описание манги
+          @Example "A great manga about pirates."
+        type: string
+      genre:
+        description: |-
+          @Description Жанры манги
+          @Example ["Action", "Adventure"]
+        items:
+          type: string
+        type: array
+      number_of_chapters:
+        description: |-
+          @Description Количество глав
+          @Example "150"
+        type: string
+      status:
+        description: |-
+          @Description Статус манги
+          @Example "Ongoing"
+        type: string
+      title:
+        description: |-
+          @Description Заголовок манги
+          @Example ["One Piece", "Naruto"]
+        items:
+          type: string
+        type: array
+      year:
+        description: |-
+          @Description Год выпуска
+          @Example "2000"
+        type: string
+    type: object
+  models.MangaPage:
+    properties:
+      image_url:
+        description: |-
+          @Description URL изображения страницы
+          @Example "https://example.com/page1.jpg"
+        type: string
+    type: object
+  models.SearchResult:
+    description: SearchResult represents the result of a manga search
+    properties:
+      found_mangas:
+        description: |-
+          @Description Список найденных манг
+          @Example [{"url": "https://example.com/manga1", "title": "Manga Title 1"}]
+        items:
+          $ref: '#/definitions/models.FoundManga'
+        type: array
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API для поиска манги и получения информации о манге
+  title: Manga Reader API
+  version: "1.0"
+paths:
+  /extract/images:
+    get:
+      consumes:
+      - application/json
+      description: Находит изображения 1 главы манги.
+      parameters:
+      - description: Ссылка на главу
+        in: query
+        name: url
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.MangaPage'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Extract images from manga URL
+      tags:
+      - manga
+  /scrap:
+    get:
+      consumes:
+      - application/json
+      description: Берет инфу о манге с html страницы
+      parameters:
+      - description: Ссылка на мангу
+        in: query
+        name: url
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Manga'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Scrape manga information from URL
+      tags:
+      - manga
+  /scrap/chapters:
+    get:
+      consumes:
+      - application/json
+      description: Берет инфу о главах манги с html страницы
+      parameters:
+      - description: Ссылка на мангу + ?tab=chapters
+        in: query
+        name: url
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Chapter'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Scrape manga chapters from URL
+      tags:
+      - manga
+  /search:
+    get:
+      consumes:
+      - application/json
+      description: Находит мангу по запросу.
+      parameters:
+      - description: Слова для поиска через +
+        in: query
+        name: q
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.SearchResult'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.ErrorResponse'
+      summary: Search for manga by query
+      tags:
+      - manga
+swagger: "2.0"

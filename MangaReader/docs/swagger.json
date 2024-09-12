@@ -1,0 +1,310 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "API для поиска манги и получения информации о манге",
+        "title": "Manga Reader API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/extract/images": {
+            "get": {
+                "description": "Находит изображения 1 главы манги.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "manga"
+                ],
+                "summary": "Extract images from manga URL",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Ссылка на главу",
+                        "name": "url",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.MangaPage"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/scrap": {
+            "get": {
+                "description": "Берет инфу о манге с html страницы",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "manga"
+                ],
+                "summary": "Scrape manga information from URL",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Ссылка на мангу",
+                        "name": "url",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Manga"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/scrap/chapters": {
+            "get": {
+                "description": "Берет инфу о главах манги с html страницы",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "manga"
+                ],
+                "summary": "Scrape manga chapters from URL",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Ссылка на мангу + ?tab=chapters",
+                        "name": "url",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Chapter"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/search": {
+            "get": {
+                "description": "Находит мангу по запросу.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "manga"
+                ],
+                "summary": "Search for manga by query",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Слова для поиска через +",
+                        "name": "q",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.SearchResult"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Chapter": {
+            "description": "Chapter represents information about a manga chapter",
+            "type": "object",
+            "properties": {
+                "date": {
+                    "description": "@Description Дата публикации главы\n@Example \"2024-01-01\"",
+                    "type": "string"
+                },
+                "link": {
+                    "description": "@Description Ссылка на главу\n@Example \"https://example.com/chapter1\"",
+                    "type": "string"
+                },
+                "pages": {
+                    "description": "@Description Страницы главы манги\n@Example [{\"image_url\": \"https://example.com/image1.jpg\"}]",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.MangaPage"
+                        }
+                    ]
+                },
+                "title": {
+                    "description": "@Description Заголовок главы\n@Example \"Chapter 1: Departure\"",
+                    "type": "string"
+                }
+            }
+        },
+        "models.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.FoundManga": {
+            "description": "FoundManga represents information about a found manga",
+            "type": "object",
+            "properties": {
+                "title": {
+                    "description": "@Description Заголовок найденной манги\n@Example \"Manga Title 1\"",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "@Description URL найденной манги\n@Example \"https://example.com/manga1\"",
+                    "type": "string"
+                }
+            }
+        },
+        "models.Manga": {
+            "description": "Manga represents information about a manga",
+            "type": "object",
+            "properties": {
+                "chapters": {
+                    "description": "@Description Список глав манги",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Chapter"
+                    }
+                },
+                "description": {
+                    "description": "@Description Описание манги\n@Example \"A great manga about pirates.\"",
+                    "type": "string"
+                },
+                "genre": {
+                    "description": "@Description Жанры манги\n@Example [\"Action\", \"Adventure\"]",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "number_of_chapters": {
+                    "description": "@Description Количество глав\n@Example \"150\"",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "@Description Статус манги\n@Example \"Ongoing\"",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "@Description Заголовок манги\n@Example [\"One Piece\", \"Naruto\"]",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "year": {
+                    "description": "@Description Год выпуска\n@Example \"2000\"",
+                    "type": "string"
+                }
+            }
+        },
+        "models.MangaPage": {
+            "type": "object",
+            "properties": {
+                "image_url": {
+                    "description": "@Description URL изображения страницы\n@Example \"https://example.com/page1.jpg\"",
+                    "type": "string"
+                }
+            }
+        },
+        "models.SearchResult": {
+            "description": "SearchResult represents the result of a manga search",
+            "type": "object",
+            "properties": {
+                "found_mangas": {
+                    "description": "@Description Список найденных манг\n@Example [{\"url\": \"https://example.com/manga1\", \"title\": \"Manga Title 1\"}]",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.FoundManga"
+                    }
+                }
+            }
+        }
+    }
+}
